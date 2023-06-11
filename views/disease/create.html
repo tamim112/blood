@@ -1,0 +1,61 @@
+{{extend 'layout.html'}}
+{{block breadcrumb}}
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-12 d-flex no-block align-items-center">
+            <h4 class="page-title">Disease</h4>
+            <div class="ms-auto ">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Master Data
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            Disease
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}
+{{block content}}
+<div class="card">
+    <form class="form-horizontal" action="{{=URL('disease','submit')}}" method="POST">
+        <div class="card-body">
+            <h4 class="card-title text-center">Add New Disease</h4>
+            <hr>
+
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label for="disease_code" class="col-sm-3  control-label col-form-label">Disease Code</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="disease_code" name="disease_code" value="{{=disease_code}}" placeholder="Code" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="disease_code" class="col-sm-3  control-label col-form-label">Disease Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="disease_code" name="disease_name" placeholder="Disease Name Here">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="form-check mr-sm-2">
+                    <input type="checkbox" class="form-check-input" id="status" name="status" value="1" checked>
+                    <label class="form-check-label mb-0" for="status">Active</label>
+                </div>
+                
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="col-md-6 text-end">
+            <button type="submit" class="btn btn-primary" ><span class="fas fa-save"> Save </span>
+            </button>
+            </div>
+        </div>
+    </form>
+</div>
+{{end}}
