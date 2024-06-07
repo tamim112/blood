@@ -146,17 +146,41 @@ animation: slideInRight 0.5s forwards !important;
   <!-- sweet alert js -->
   <script src="{{=URL('static','js/sweetalert2@11.js')}}"></script>
   <!-- sweet alert js -->
-  {{block script}}
-  {{end}}
+  
   <script>
+    
+    $(document).ready(function() {
+
+      $("#ExportExcel").on("click", function() {
+      $('.dt-buttons .buttons-excel' ).click();
+    });
+    // For Delete button swiftalert
+    $(document).on("click", "#delete_btn", function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location = $(this).attr('href');
+            }
+        });
+    });
+
+    
+});
     /****************************************
      *       Basic Table                   *
      ****************************************/
     $("#zero_config").DataTable();
-
-    
   </script>
-
+{{block script}}
+{{end}}
   <!-- Flash Message -->
   {{if response.flash != '' and isinstance(response.flash, dict):}}
   <script>  

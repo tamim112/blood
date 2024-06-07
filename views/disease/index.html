@@ -27,7 +27,7 @@
     <h5 class="card-title">Disease List</h5>
     <div class="d-flex justify-content-between">
       <div>
-      <a href="#" class="btn btn-outline-secondary mr-1">
+      <a href="#" class="btn btn-outline-secondary mr-1" id="ExportExcel">
         <span class="fas fa-file-excel"> Export</span>
       </a>
       
@@ -63,10 +63,10 @@
                 <a href="#" class="btn btn-secondary btn-sm mr-2">
                     <span class="fas fa-eye"></span>
                 </a>
-                <a href="#" class="btn btn-info btn-sm  mr-2">
+                <a href="{{=URL('disease','edit')}}/{{=i.id}}" class="btn btn-info btn-sm  mr-2">
                     <span class="fas fa-pencil-alt"></span>
                 </a>
-                <a href="#" class="btn btn-danger btn-sm">
+                <a href="{{=URL('disease','delete')}}/{{=i.id}}" class="btn btn-danger btn-sm" id="delete_btn">
                   <span class="fas fa-trash-alt"></span>
               </a>
             </div>
@@ -80,4 +80,9 @@
     </div>
   </div>
 </div>
+{{end}}
+{{block script}}
+<script>
+
+</script>
 {{end}}
