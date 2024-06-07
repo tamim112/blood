@@ -25,7 +25,7 @@
 <div class="card">
     <form class="form-horizontal" action="{{=URL('disease','submit')}}" method="POST">
         <div class="card-body">
-            <h4 class="card-title text-center">Add New Disease</h4>
+            <h4 class="card-title text-start"><i class="fas fa-plus"></i> Add New Disease</h4>
             <hr>
 
             <div class="col-md-6">
@@ -51,9 +51,10 @@
             </div>
         </div>
         <div class="card-footer">
-            <div class="col-md-6 text-end">
+            <div class="col-md-6 text-start">
             <button type="submit" class="btn btn-primary" ><span class="fas fa-save"> Save </span>
             </button>
+            <a href="{{=URL('disease','index')}}" class="btn btn-warning" ><span class="fas fa-arrow-left"> Back </span></a>
             </div>
         </div>
     </form>

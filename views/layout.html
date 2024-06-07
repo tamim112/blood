@@ -3,7 +3,7 @@
 
 <head>
   <base href="" />
-  <title>Blood</title>
+  <title>TEST</title>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <!-- Tell the browser to be responsive to screen width -->
@@ -34,6 +34,33 @@
       color: #3F4254;
       background-color: #e7dbd6
     }
+    
+/* Modal design */
+.customPopup{
+position: relative;
+top:33px;
+left:8px;
+background-color:rgb(247, 248, 249) !important;
+font-size:.775rem !important;
+font-family: var(--bs-font-sans-serif);
+border-radius:0px!important;
+}
+
+@keyframes slideInRight {
+from {
+    transform: translateX(100%);
+}
+to {
+    transform: translateX(0);
+}
+}
+/* Modal design */
+
+/* Flash Message */
+.swal2-toast.swal2-show {
+animation: slideInRight 0.5s forwards !important;
+}
+/* Flash Message */
   </style>
 
 </head>
@@ -71,6 +98,7 @@
       <!-- Main ========================================= -->
       <!-- Begin page content -->
       <div class="container-fluid">
+
         {{block content}}
 
         {{end}}
@@ -86,8 +114,7 @@
     </div>
   </div>
   <!-- The javascript =============================== -->
-  {{block script}}
-  {{end}}
+ 
 
   <script src="{{=URL('static','assets/libs/jquery/dist/jquery.min.js')}}"></script>
   <!-- Bootstrap tether Core JavaScript -->
@@ -101,7 +128,7 @@
   <!--Custom JavaScript -->
   <script src="{{=URL('static','dist/js/custom.min.js')}}"></script>
   <!--This page JavaScript -->
-  <script src="{{=URL('static','dist/js/pages/dashboards/dashboard1.js')}}"></script>
+  <!-- <script src="{{=URL('static','dist/js/pages/dashboards/dashboard1.js')}}"></script> -->
   <!-- Charts js Files -->
   <script src="{{=URL('static','assets/libs/flot/excanvas.js')}}"></script>
   <script src="{{=URL('static','assets/libs/flot/jquery.flot.js')}}"></script>
@@ -116,12 +143,44 @@
   <script src="{{=URL('static','assets/extra-libs/multicheck/datatable-checkbox-init.js')}}"></script>
   <script src="{{=URL('static','assets/extra-libs/multicheck/jquery.multicheck.js')}}"></script>
   <script src="{{=URL('static','assets/extra-libs/DataTables/datatables.min.js')}}"></script>
+  <!-- sweet alert js -->
+  <script src="{{=URL('static','js/sweetalert2@11.js')}}"></script>
+  <!-- sweet alert js -->
+  {{block script}}
+  {{end}}
   <script>
     /****************************************
      *       Basic Table                   *
      ****************************************/
     $("#zero_config").DataTable();
+
+    
   </script>
+
+  <!-- Flash Message -->
+  {{if response.flash != '' and isinstance(response.flash, dict):}}
+  <script>  
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      customClass: {
+        popup: "customPopup",
+      },
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+    Toast.fire({
+      icon:"{{=response.flash['msg_type']}}",
+      title: "{{=XML(response.flash['msg'])}}"
+    });
+  </script>
+{{pass}}
+  <!-- Flash Message -->
 </body>
 
 </html>

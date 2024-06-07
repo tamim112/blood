@@ -103,16 +103,16 @@ $(function () {
   sparklineLogin();
 
   // This is for the chat messege on enter
-  $(function () {
-    $(document).on("keypress", "#textarea1", function (e) {
-      if (e.keyCode == 13) {
-        var id = $(this).attr("data-user-id");
-        var msg = $(this).val();
-        msg = msg_sent(msg);
-        $("#someDiv").append(msg);
-        $(this).val("");
-        $(this).focus();
-      }
-    });
-  });
-});
+//   $(function () {
+//     $(document).on("keypress", "#textarea1", function (e) {
+//       if (e.keyCode == 13) {
+//         var id = $(this).attr("data-user-id");
+//         var msg = $(this).val();
+//         msg = msg_sent(msg);
+//         $("#someDiv").append(msg);
+//         $(this).val("");
+//         $(this).focus();
+//       }
+//     });
+//   });
+// });

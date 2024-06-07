@@ -3,24 +3,50 @@ def index():
     return locals()
 
 def create():
-    result = db(db.diseases).select(db.diseases.disease_code).last()
-    if result is not None:
-        disease_code = int(result.disease_code)+1
-    else:
-        disease_code = '1001' 
-    disease_code=str(disease_code)
-    return locals()
+  # if session.status=="" or session.status==None:
+  #   redirect(URL(c='login',f='index')) 
 
-def submit():
-        
+  # if session.emp_role in ['management','unit_management']:
+  #   return "Access Denied"
+  result = db(db.diseases).select(db.diseases.disease_code).last()
+  if result is not None:
+      disease_code = int(result.disease_code)+1
+  else:
+      disease_code = '1001' 
+  disease_code=str(disease_code)
+  return locals()
+
+def add_validation(request):
+  # validation
+  errors =[]
+  if not request.vars.disease_code:
+      errors.append('SBU is required.')
+  if not request.vars.disease_name:
+      errors.append('Name is required.')
+
+  # validation errors generate
+  if errors:
+      msg = ''
+      for item in errors:
+          msg = msg + item + ' <br>'
+      session.flash = {"msg_type":"error","msg":msg}
+      redirect (URL('disease','create'))
+    # validation end
+  return True
+  
+def submit():        
     disease_code = str(request.vars.disease_code)
     disease_name = str(request.vars.disease_name)
-    sql = """
-        INSERT INTO diseases(disease_code, disease_name) 
-        VALUES ('"""+disease_code+"""','"""+disease_name+"""')
-        """
-    insert = db.executesql(sql)
-    return  dict(redirect(URL('disease','index')))
+    
+    validation=add_validation(request)    
+    if validation==True:
+      sql = """
+          INSERT INTO diseases(disease_code, disease_name) 
+          VALUES ('{disease_code}','{disease_name}')
+          """.format(disease_code=disease_code,disease_name=disease_name)
+      insert = db.executesql(sql)
+      session.flash = {"msg_type":"success","msg":"Added successfully"}
+      return  dict(redirect(URL('disease','index')))
     
 def edit():
   if session.status=="" or session.status==None:
